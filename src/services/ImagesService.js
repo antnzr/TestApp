@@ -1,12 +1,13 @@
 export default class ImagesService {
 
     _apiBase = "https://api.unsplash.com";
+    _client_id = "cf49c08b444ff4cb9e4d126b7e9f7513ba1ee58de7906e4360afc1a33d1bf4c0";
 
     getResource = async (query) => {
         let headers = new Headers({
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": "Client-ID ab3411e4ac868c2646c0ed488dfd919ef612b04c264f3374c97fff98ed253dc9"
+            "Authorization": `Client-ID ${this._client_id}`
         });
 
         const res = await fetch(`${this._apiBase}${query}`, {
@@ -27,11 +28,23 @@ export default class ImagesService {
         return res.map(this._transformImage)
     };
 
+    fetchImageById = async (id) => {
+        const res = await this.getResource(`/photos/${id}`);
+
+        return this._transformImageFullInfo(res);
+    };
+
+    _transformImageFullInfo = (image) => {
+        return {
+            id: image.id,
+            imageFullSrc: image.urls.full
+        }
+    };
+
     _transformImage = (image) => {
         return {
             id: image.id,
             imageSrc: image.urls.small,
-            imageFullSrc: image.urls.full,
             name: image.description,
             author: image.user.name
         }

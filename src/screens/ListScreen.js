@@ -29,7 +29,7 @@ class ListScreen extends Component {
             loading
                 ?
                 <View style={styles.loadingIndicator}>
-                    <ActivityIndicator size="large" color="#330066" animating/>
+                    <ActivityIndicator size="large" animating/>
                 </View>
                 :
                 <SafeAreaView style={styles.container}>

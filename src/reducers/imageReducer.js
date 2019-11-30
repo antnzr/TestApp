@@ -1,20 +1,23 @@
 import {
-    FETCH_IMAGES_SUCCESS
+    FETCH_IMAGE_BY_ID_SUCCESS,
+    CLEAR_IMAGE
 } from "../actions/actionTypes";
 
 const initialState = {
-    images: [],
+    image: [],
     loading: true
 };
 
 export default (state = initialState, {type, payload}) => {
 
     switch (type) {
-        case FETCH_IMAGES_SUCCESS:
+        case FETCH_IMAGE_BY_ID_SUCCESS:
             return {
-                images: payload,
+                image: payload,
                 loading: false
             };
+        case CLEAR_IMAGE:
+            return initialState;
         default:
             return state;
     }

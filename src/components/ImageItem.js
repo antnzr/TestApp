@@ -14,10 +14,9 @@ class ImageItem extends Component {
     render() {
         const {image, navigation} = this.props;
         return (
-            <SafeAreaView
-                style={styles.cardContainer}>
+            <SafeAreaView style={styles.cardContainer}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Image', {image: image})}>
+                    onPress={() => navigation.navigate('Image', {id: image.id})}>
                     <Image style={styles.image}
                            source={{uri: image.imageSrc}}/>
                 </TouchableOpacity>

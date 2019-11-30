@@ -1,46 +1,66 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, Image, SafeAreaView, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {
+    Dimensions,
+    ActivityIndicator,
+    Image,
+    SafeAreaView,
+    StyleSheet
+} from 'react-native';
+
+import {
+    fetchImageById,
+    clearImage
+} from "../actions";
 
 class ImageScreen extends Component {
 
-    state = {
-        loading: true
-    };
+   componentDidMount() {
+       this.props.fetchImageById(this.props.navigation.getParam("id", null))
+   }
 
-    _onLoadEnd = () => {
-        this.setState({
-            loading: false
-        })
-    };
+   componentWillUnmount() {
+       this.props.clearImage();
+   }
 
     render() {
-        const {navigation} = this.props;
-        const image = navigation.getParam("image", {});
+        const {image, loading} = this.props;
 
         return (
             <SafeAreaView style={styles.container}>
                 <Image
-                    onLoadEnd={this._onLoadEnd}
                     style={styles.image}
                     source={{uri: image.imageFullSrc}}/>
                 <ActivityIndicator
                     style={styles.loadingIndicator}
-                    size='large' color="#330066"
-                    animating={this.state.loading}/>
+                    size='large'
+                    animating={loading}/>
             </SafeAreaView>
         )
     }
 }
 
-export default ImageScreen
+const mapStateToProps = ({imageData: {image, loading}}) => {
+    return {image, loading}
+};
 
+const mapDispatchToProps = {
+    fetchImageById,
+    clearImage
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImageScreen)
+
+const {width, height} = Dimensions.get("window");
 const styles = StyleSheet.create({
     container: {
         flex: 1
     },
     image: {
         flex: 1,
-        resizeMode: 'cover'
+        resizeMode: 'contain',
+        maxHeight: height,
+        maxWidth: width
     },
     loadingIndicator: {
         position: 'absolute',
