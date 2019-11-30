@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         borderRadius: 5,
-        marginBottom: 5
+        marginTop: 5
     },
     description: {
         width: 0,

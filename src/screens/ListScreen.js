@@ -34,6 +34,7 @@ class ListScreen extends Component {
                 :
                 <SafeAreaView style={styles.container}>
                     <FlatList
+                        contentContainerStyle={{ paddingBottom: 5}}
                         style={styles.list}
                         data={images}
                         renderItem={this.renderItem}
@@ -64,6 +65,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     list: {
-        marginHorizontal: 5
+        marginHorizontal: 5,
     }
 });
