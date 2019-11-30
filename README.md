@@ -15,3 +15,5 @@
 * Flexbox
 * React Navigation
 * компоненты высшего порядка
+
+<img src="/Screenshot_2019-11-30-13-34-54.png" width="300" heigth="500" />
